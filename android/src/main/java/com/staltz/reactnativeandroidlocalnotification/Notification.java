@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.net.Uri;
+import android.app.NotificationChannel;
 
 import java.lang.System;
 import java.net.URL;
@@ -112,12 +113,23 @@ public class Notification {
      * Build the notification.
      */
     public android.app.Notification build() {
-        android.support.v4.app.NotificationCompat.Builder notificationBuilder = new android.support.v4.app.NotificationCompat.Builder(
-                context);
-
+        NotificationCompat.Builder notificationBuilder;
+        String iconName = attributes.smallIcon != null ? attributes.smallIcon : "ic_launcher";
+        int iconResource = context.getResources().getIdentifier(attributes.smallIcon, "mipmap", context.getPackageName());
+        String channelID = attributes.channelID != null ? attributes.channelID : "channel_0";
+        if (iconResource == 0) {
+            Log.w("Notification", "icon resource not found with name " + iconName);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelName = attributes.channelName != null ? attributes.channelName : "Default";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationManager notificationManager = getSysNotificationManager();
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            notificationManager.createNotificationChannel(channel);
+        }
+        notificationBuilder = new NotificationCompat.Builder(context, channelID);
         notificationBuilder.setContentTitle(attributes.subject).setContentText(attributes.message)
-                .setSmallIcon(
-                        context.getResources().getIdentifier(attributes.smallIcon, "mipmap", context.getPackageName()))
+                .setSmallIcon(iconResource)
                 .setAutoCancel(attributes.autoClear).setContentIntent(getContentIntent());
 
         if (attributes.priority != null) {
@@ -138,7 +150,7 @@ public class Notification {
 
         if (attributes.inboxStyle) {
 
-            android.support.v4.app.NotificationCompat.InboxStyle inboxStyle = new android.support.v4.app.NotificationCompat.InboxStyle();
+            NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
             if (attributes.inboxStyleBigContentTitle != null) {
                 inboxStyle.setBigContentTitle(attributes.inboxStyleBigContentTitle);
@@ -187,7 +199,7 @@ public class Notification {
         // if bigText is not null, it have priority over bigStyleImageBase64
         if (attributes.bigText != null) {
             notificationBuilder
-                    .setStyle(new android.support.v4.app.NotificationCompat.BigTextStyle().bigText(attributes.bigText));
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(attributes.bigText));
         } else if (attributes.bigStyleUrlImage != null && !attributes.bigStyleUrlImage.equals("")) {
 
             Bitmap bigPicture = null;

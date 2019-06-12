@@ -226,13 +226,27 @@ Must use with `sendAt` and `repeatEvery`. End repeating this notification after 
 > });
 > ```
 
+#### Channels
+
+*Channels where introduced in API 26, [see official documentation](https://developer.android.com/training/notify-user/channels).*
+
+**channelID (`string`)**
+The channel identifier.
+
+**channelName (`string`)**
+The human-readable channel name.
+
 #### Customization
 
 **priority (`number`)**
 Priority of this notification, can be `-2`, `-1`, `0`, `1`, `2`. When this is set to `1` or `2`, heads-up notification will be more likely to show on Android 5+. Defaults to `1`.
 
 **smallIcon (`string`)**
-The icon (file name) to show. This icon must be placed in the project's `android/app/src/main/res/mipmap-*` folder. Defaults to `ic_launcher`.
+The icon (file name without extension) to show. This icon must be placed in the project's `android/app/src/main/res/mipmap-*` folders. Defaults to `ic_launcher`.  
+Important notes :
+
+- your icon *must* be white with transparent background to support API 20+, see [this SO post](https://stackoverflow.com/q/30795431/2779871)
+- the `color` attribute *must* be set to support API 20+
 
 **largeIcon (`string`)**
 Not yet implemented.
