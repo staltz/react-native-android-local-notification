@@ -120,7 +120,7 @@ function encodeNativeNotification(attributes) {
         }
     }
 
-    if (attributes.priority === undefined) attributes.priority = 1;
+    if (attributes.priority === undefined) attributes.priority = 2;
     if (attributes.sound === undefined) attributes.sound = 'default';
     if (attributes.vibrate === undefined) attributes.vibrate = 'default';
     if (attributes.lights === undefined) attributes.lights = 'default';

@@ -122,9 +122,10 @@ public class Notification {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String channelName = attributes.channelName != null ? attributes.channelName : "Default";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationManager notificationManager = getSysNotificationManager();
             NotificationChannel channel = new NotificationChannel(channelID, channelName, importance);
+            channel.setLockscreenVisibility(android.app.Notification.VISIBILITY_PUBLIC);
             notificationManager.createNotificationChannel(channel);
         }
         notificationBuilder = new NotificationCompat.Builder(context, channelID);
