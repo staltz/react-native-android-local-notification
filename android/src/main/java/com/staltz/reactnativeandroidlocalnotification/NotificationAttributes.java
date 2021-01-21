@@ -14,6 +14,10 @@ public class NotificationAttributes {
     public String action;
     public String payload;
 
+    public String channelId;
+    public String channelName;
+    public String channelDescription;
+
     public Boolean delayed;
     public Integer delay;
 
@@ -72,6 +76,13 @@ public class NotificationAttributes {
             action = readableMap.getString("action");
         if (readableMap.hasKey("payload"))
             payload = readableMap.getString("payload");
+
+        if (readableMap.hasKey("channelId"))
+            channelId = readableMap.getString("channelId");
+        if (readableMap.hasKey("channelName"))
+            channelName = readableMap.getString("channelName");
+        if (readableMap.hasKey("channelDescription"))
+            channelDescription = readableMap.getString("channelDescription");
 
         if (readableMap.hasKey("delayed"))
             delayed = readableMap.getBoolean("delayed");

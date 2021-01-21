@@ -20,7 +20,10 @@ Notification.addListener('press', function(e) {
 Notification.create({
   subject: 'Notification With Payload',
   message: 'This is a notification that contains custom payload.',
-  payload: { number: 1, what: true, someAnswer: '42' }
+  payload: { number: 1, what: true, someAnswer: '42' },
+  channelId: "channel-id",
+  channelName: "Channel B",
+  channelDescription: "This is a description for channel B",
 });
 
 // Receive the payload on notification events
@@ -32,7 +35,10 @@ Notification.addListener('press', function(e) {
 Notification.create({
   subject: 'Notification With Custom Icon',
   message: 'This is a notification with a specified icon.',
-  smallIcon: 'ic_alert'
+  smallIcon: 'ic_alert',
+  channelId: "channel-id",
+  channelName: "Channel B",
+  channelDescription: "This is a description for channel B",
 });
 
 // Scheduled notifications
@@ -41,7 +47,10 @@ Notification.create({
   message: 'This notification will show on every Friday morning at 8:30 AM, starts at 2015/9/9 and end after 10 times.',
   sendAt: new Date(2015, 9, 9, 8, 30),
   repeatEvery: 'week',
-  count: 10
+  count: 10,
+  channelId: "channel-id",
+  channelName: "Channel B",
+  channelDescription: "This is a description for channel B",
 });
 ```
 
@@ -148,6 +157,9 @@ Notification.create({
   message: 'This is a notification that contains custom payload.',
   smallIcon: 'ic_launcher',
   autoClear: true,
+  channelId: "channel-id",
+  channelName: "Channel B",
+  channelDescription: "This is a description for channel B",
   payload: { number: 1, what: true, someAnswer: '42' }
 });
 ```
@@ -207,7 +219,10 @@ Must use with `sendAt` and `repeatEvery`. End repeating this notification after 
 >   message: 'This notification will show on every Friday morning at 8:30 AM, starts at 2015/9/9 and end after 10 times.',
 >   sendAt: new Date(2015, 9, 9, 8, 30),
 >   repeatEvery: 'week',
->   repeatCount: 10
+>   repeatCount: 10,
+>   channelId: "channel-id",
+>   channelName: "Channel B",
+>   channelDescription: "This is a description for channel B",
 > });
 > ```
 >
@@ -217,7 +232,10 @@ Must use with `sendAt` and `repeatEvery`. End repeating this notification after 
 >   message: 'This notification will show on 2015/9/9 morning at 8:30 AM, and repeat for 10 times every minute.',
 >   sendAt: new Date(2015, 9, 9, 8, 30),
 >   repeatEvery: 60000,
->   repeatCount: 10
+>   repeatCount: 10,
+>   channelId: "channel-id",
+>   channelName: "Channel B",
+>   channelDescription: "This is a description for channel B",
 > });
 > ```
 >
@@ -225,7 +243,10 @@ Must use with `sendAt` and `repeatEvery`. End repeating this notification after 
 > Notification.create({
 >   subject: 'Delayed Notification',
 >   message: 'This notification will show after 10 seconds, even the app has been stoped.',
->   delay: 10000
+>   delay: 10000,
+>   channelId: "channel-id",
+>   channelName: "Channel B",
+>   channelDescription: "This is a description for channel B",
 > });
 > ```
 
