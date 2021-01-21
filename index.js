@@ -111,6 +111,9 @@ function encodeNativeNotification(attributes) {
     if (!attributes.id) attributes.id = parseInt(Math.random() * 100000);
     if (!attributes.action) attributes.action = 'DEFAULT';
     if (!attributes.payload) attributes.payload = {};
+    if (!attributes.channelId) attributes.channelId = "default-channel";
+    if (!attributes.channelName) attributes.channelName = "default-channel";
+    if (!attributes.channelDescription) attributes.channelDescription = "default-channel";
     if (attributes.autoClear === undefined) attributes.autoClear = true;
     if (attributes.tickerText === undefined) {
         if (attributes.subject) {
